@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="22"/>
-	<style name="HeaderStyle" fill="Solid" hAlign="Left" vAlign="Middle" fontName="SansSerif" fontSize="12"/>
+	<style name="HeaderStyle" isDefault="false" fill="Solid" hAlign="Left" vAlign="Middle" fontName="SansSerif" fontSize="12"/>
 	<parameter name="MetadataURL" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[$P{MetadataURL}+"reports\\"]]></defaultValueExpression>
@@ -41,6 +41,9 @@
 	</field>
 	<field name="PaymentDay" class="java.util.Date">
 		<fieldDescription><![CDATA[PaymentDay]]></fieldDescription>
+	</field>
+	<field name="PayPeriod" class="java.lang.Integer">
+		<fieldDescription><![CDATA[PayPeriod]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -247,7 +250,7 @@
 			<textField>
 				<reportElement style="HeaderStyle" x="79" y="12" width="150" height="16"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[java.lang.Long.toString((($F{PaymentDay}.getTime() - $F{CreationTime}.getTime())/(1000 * 60 * 60 * 24)))+" dana"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PayPeriod}+" dana"]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SDReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="21"/>
+	<style name="HeaderStyle" isDefault="false" fill="Solid" hAlign="Left" vAlign="Middle" fontName="SansSerif" fontSize="12"/>
+	<parameter name="MetadataURL" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{MetadataURL}+"reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ItemsDataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<field name="CCName" class="java.lang.String">
+		<fieldDescription><![CDATA[CompanyCode.Name]]></fieldDescription>
+	</field>
+	<field name="CCAccountNo" class="java.lang.String">
+		<fieldDescription><![CDATA[CompanyCode.AccountNo]]></fieldDescription>
+	</field>
+	<field name="CCPIB" class="java.lang.String">
+		<fieldDescription><![CDATA[CompanyCode.Pib]]></fieldDescription>
+	</field>
+	<field name="CCTelephone" class="java.lang.String">
+		<fieldDescription><![CDATA[CompanyCode.Telephone]]></fieldDescription>
+	</field>
+	<field name="CCFax" class="java.lang.String">
+		<fieldDescription><![CDATA[CompanyCode.Fax]]></fieldDescription>
+	</field>
+	<field name="BuyerName" class="java.lang.String">
+		<fieldDescription><![CDATA[BusinessPartner.Name]]></fieldDescription>
+	</field>
+	<field name="BuyerAddress" class="java.lang.String">
+		<fieldDescription><![CDATA[BusinessPartner.Address]]></fieldDescription>
+	</field>
+	<field name="BuyerPIB" class="java.lang.String">
+		<fieldDescription><![CDATA[BusinessPartner.Pib]]></fieldDescription>
+	</field>
+	<field name="StockDocumentCode" class="java.lang.String">
+		<fieldDescription><![CDATA[DocumentCode]]></fieldDescription>
+	</field>
+	<field name="CreationTime" class="java.util.Date">
+		<fieldDescription><![CDATA[CreationTime]]></fieldDescription>
+	</field>
+	<field name="PaymentDay" class="java.util.Date">
+		<fieldDescription><![CDATA[PaymentDay]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="23" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="77" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{CreationTime}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="3" width="77" height="20"/>
+				<textElement/>
+				<text><![CDATA[Datum štampe: ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="4" forecolor="#999999" backcolor="#999999"/>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="4" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="100" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="100"/>
+				<dataSourceExpression><![CDATA[$P{ItemsDataSource}]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "WhoNotPayReportItems.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="6" width="555" height="4" forecolor="#999999" backcolor="#999999"/>
+			</rectangle>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement x="508" y="0" width="47" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="10" splitType="Stretch"/>
+	</summary>
+</jasperReport>
